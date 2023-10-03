@@ -1,0 +1,25 @@
+﻿@inject CountryRenewableElectricityDataService ElectricityDS
+
+<div class="my_chart_wrapper">
+    <IgbCategoryChart Name="chart"
+                      Height="300px" Width="500px"
+                      ChartType="CategoryChartType.Column"
+                      DataSource="ElectricityData"
+                      IsHorizontalZoomEnabled="false"
+                      IsVerticalZoomEnabled="false"
+                      IsCategoryHighlightingEnabled="true"
+                      HighlightingMode="SeriesHighlightingMode.FadeOthersSpecific"
+                      HighlightingBehavior="SeriesHighlightingBehavior.NearestItemsAndSeries"
+                      CrosshairsDisplayMode="CrosshairsDisplayMode.None"
+                      SeriesAddedScript="OnSeriesAddedScript">
+    </IgbCategoryChart>
+</div>
+
+@code {
+    private CountryRenewableElectricityItem[]? ElectricityData = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.ElectricityData = await ElectricityDS.GetElectricityDataAsync();
+    }
+}
